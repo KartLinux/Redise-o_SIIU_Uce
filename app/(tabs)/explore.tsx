@@ -1,110 +1,176 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Colors } from '../../constants/Colors';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+const resources = [
+  {
+    id: '1',
+    title: 'Resumen claro y explicativo',
+    image: require('../../assets/images/layoutTabs/actividades/mente_binaria.png'),
+  },
+  {
+    id: '2',
+    title: 'Técnico y lo cotidiano',
+    image: require('../../assets/images/layoutTabs/actividades/plagio.png'),
+  },
+  {
+    id: '3',
+    title: 'Resumen claro y explicativo',
+    image: require('../../assets/images/layoutTabs/actividades/onenote.png'),
+  },
+  {
+    id: '4',
+    title: 'Resumen claro y explicativo',
+    image: require('../../assets/images/layoutTabs/actividades/excel.png'),
+  },
+  {
+    id: '5',
+    title: 'Técnico y lo cotidiano',
+    image: require('../../assets/images/layoutTabs/actividades/word.png'),
+  },
+  {
+    id: '6',
+    title: 'tos y analogias',
+    image: require('../../assets/images/layoutTabs/actividades/pdf.png'),
+  },
+];
 
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <View style={styles.container}>
+      {/* Fondo gradiente */}
+      <LinearGradient
+        colors={Colors.light.gradientSecondary as [string, string]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+
+      {/* Header y buscador */}
+      <View style={styles.headerRow}>
+        <Text style={styles.headerTitle}>12 Recursos</Text>
+        <TouchableOpacity>
+          <Text style={styles.headerAdd}>+</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search"
+          style={styles.searchInput}
+          placeholderTextColor="#888"
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+      </View>
+
+      {/* Filtro */}
+      <View style={styles.filterRow}>
+        <Text style={styles.filterIcon}>↕</Text>
+        <Text style={styles.filterText}>Recientes</Text>
+      </View>
+
+      {/* Grid de recursos */}
+      <FlatList
+        data={resources}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        contentContainerStyle={styles.grid}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <Image source={item.image} style={styles.cardImage} />
+            <Text style={styles.cardTitle} numberOfLines={2}>{item.title}</Text>
+          </View>
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    position: 'relative',
   },
-  titleContainer: {
+  headerRow: {
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 32,
+    marginHorizontal: 16,
+    marginBottom: 8,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#222',
+  },
+  headerAdd: {
+    fontSize: 28,
+    color: Colors.light.primary,
+    fontWeight: 'bold',
+  },
+  searchContainer: {
+    marginHorizontal: 16,
+    marginBottom: 8,
+  },
+  searchInput: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    height: 36,
+    fontSize: 15,
+    color: '#222',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.07,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  filterRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 20,
+    marginBottom: 8,
+    gap: 6,
+  },
+  filterIcon: {
+    fontSize: 18,
+    color: Colors.light.primary,
+    marginRight: 4,
+  },
+  filterText: {
+    fontSize: 15,
+    color: '#222',
+    fontWeight: '600',
+  },
+  grid: {
+    paddingHorizontal: 10,
+    paddingBottom: 16,
+  },
+  card: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 14,
+    margin: 6,
+    alignItems: 'center',
+    padding: 10,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.07,
+    shadowRadius: 2,
+  },
+  cardImage: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    marginBottom: 8,
+    resizeMode: 'contain',
+  },
+  cardTitle: {
+    fontSize: 13,
+    color: '#222',
+    textAlign: 'center',
+    fontWeight: '500',
   },
 });
